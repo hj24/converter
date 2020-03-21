@@ -15,7 +15,8 @@ def parser():
         cnt = 0
         while success:
             success, image = vidcap.read()
-            cv2.imwrite("{0}/frame{1}.jpg".format(parsedir, cnt), image)
+            if image is not None:
+                cv2.imwrite("{0}/frame{1}.jpg".format(parsedir, cnt), image)
             # 按键终止事件
             if cv2.waitKey(10) == 27:
                 break
