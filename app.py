@@ -12,34 +12,41 @@ def _remove_files_under_dir(dir):
     for file in os.listdir(dir):
         os.remove(dir + '/' + file)
 
-_remove_files_under_dir(newdir)
-
 def _preprocess():
-    print('adkljhvfb')
-    os.chmod(basedir, 777)
-    print('aidhkjgfs')
     if os.path.exists(newdir):
+        print('{} 已存在，删除旧文件中...'.format(newdir))
         _remove_files_under_dir(newdir)
+        print('{} 清理完毕'.format(newdir))
+    else:
+        print('创建 {} 中...'.format(newdir))
+        os.mkdir(newdir)
+        print('创建 {} 完毕'.format(newdir))
     if os.path.exists(parsedir):
+        print('{} 已存在，删除旧文件中...'.format(parsedir))
         _remove_files_under_dir(parsedir)
+        print('{} 清理完毕'.format(parsedir))
+    else:
+        print('创建 {} 中...'.format(parsedir))
+        os.mkdir(parsedir)
+        print('创建 {} 完毕'.format(parsedir))
     if os.path.exists(output_path):
+        print('删除旧输出视频中...')
         os.remove(output_path)
+        print('删除完毕')
 
 def run():
     try:
         _preprocess()
-        print('padojihusgyfihueijdawok;aljefhg')
         # video在运行程序之前是必须存在的，用户需要提供初始video
         # 可以在cfg.py里配置，没有配置的话，需要抛出异常
         if not os.path.exists(videodir):
-            raise
-        print(';[dlpksljfhbbklda')
+            raise Exception('video path not exists')
         # 开始主程序
         print('开始解码原始视频...')
         parser()
         print('解码完毕，开始转码...')
         transfer()
-        print('转码完毕，开始生产新视频...')
+        print('转码完毕，开始生成新视频...')
         generate_video(newdir)
     except Exception as e:
         print('失败: \n{}'.format(e))

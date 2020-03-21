@@ -33,9 +33,7 @@ phfontsize = 15
 
 - 运行
 ```shell script
-python app.py
+sudo python app.py
 ```
-
-或直接运行`app.py`的`run()`方法
 
 
